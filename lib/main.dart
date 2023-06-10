@@ -49,13 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
             // 拡大縮小可能な日本地図
             InteractiveViewer(
                 minScale: 0.1,
@@ -63,11 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Image.asset('images/japan.png')),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
