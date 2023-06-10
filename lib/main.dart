@@ -56,7 +56,11 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Image.asset('images/japan.png')
+            // 拡大縮小可能な日本地図
+            InteractiveViewer(
+                minScale: 0.1,
+                maxScale: 15,
+                child: Image.asset('images/japan.png')),
           ],
         ),
       ),
