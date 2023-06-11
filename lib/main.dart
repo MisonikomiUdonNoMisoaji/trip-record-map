@@ -33,6 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final imageSize = MediaQuery.of(context).size.width;
+
+    // TODO: これはテストデータ
     final List<PrefectureNamePositionData> prefectureNamePositionDataList = [
       PrefectureNamePositionData(1400 / 1523, 1400 / 1523, "テストだよー")
     ];
@@ -64,9 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         Positioned(
                             left: imageSize * data.x,
                             top: imageSize * data.y,
-                            // 画像の拡大率に合わせて、ピン画像のサイズを調整
-                            // width: defaultWidth / scale,
-                            // height: defaultHeight / scale,
                             child: Text('${data.message}'))
                     ],
                   )),
