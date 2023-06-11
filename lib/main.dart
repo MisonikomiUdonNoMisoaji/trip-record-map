@@ -30,16 +30,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final imageSize = MediaQuery.of(context).size.width;
+    final List<PrefectureNamePositionData> prefectureNamePositionDataList = [
+      PrefectureNamePositionData(1400 / 1523, 1400 / 1523, "テストだよー")
+    ];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -50,13 +47,39 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // 拡大縮小可能な日本地図
-            InteractiveViewer(
-                minScale: 0.1,
-                maxScale: 15,
-                child: Image.asset('images/japan.png')),
+            Container(
+              width: imageSize,
+              height: imageSize,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.red),
+              ),
+              child: InteractiveViewer(
+                  minScale: 0.1,
+                  maxScale: 15,
+                  child: Stack(
+                    children: [
+                      Image.asset('images/japan.png'),
+                      for (PrefectureNamePositionData data
+                          in prefectureNamePositionDataList)
+                        Positioned(
+                            left: imageSize * data.x,
+                            top: imageSize * data.y,
+                            // 画像の拡大率に合わせて、ピン画像のサイズを調整
+                            // width: defaultWidth / scale,
+                            // height: defaultHeight / scale,
+                            child: Text('${data.message}'))
+                    ],
+                  )),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+class PrefectureNamePositionData {
+  double x, y;
+  final String message;
+  PrefectureNamePositionData(this.x, this.y, this.message);
 }
